@@ -8,23 +8,18 @@ djangorestframework-simplejwt[crypto]==5.3.1
 drf-spectacular==0.27.2
 drf-yasg==1.21.7
 
-
 psycopg2-binary==2.9.9
 
+# Celery
+celery==5.4.0
+django_celery_results==2.5.1
 
-
-
-
-
-
-
-# AWS
-boto3==1.35.49
+# Redis
+redis==5.1.0
 
 # Deployment
 gunicorn==22.0.0
 
 # Miscellaneous
 pre-commit==3.7.1
-drf-writable-nested==0.7.0
-django-import-export==4.1.1
+requests==2.32.4

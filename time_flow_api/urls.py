@@ -11,6 +11,10 @@ urlpatterns_v1 = [
         "api/v1/",
         include("apps.user.urls"),
     ),
+    path(
+        "api/v1/",
+        include("apps.task.urls"),
+        ),
 ]
 urlpatterns = [
     path("admin/", admin.site.urls),

@@ -14,3 +14,6 @@ postgres_settings = {
     "HOST": POSTGRES_HOST,
     "PORT": POSTGRES_PORT
 }
+
+REDIS_HOST = get_env_var("REDIS_HOST")
+REDIS_PORT = get_int_env_var("REDIS_PORT")

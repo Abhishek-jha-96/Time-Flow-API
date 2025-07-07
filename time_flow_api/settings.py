@@ -9,6 +9,13 @@ from .configurations.rest_framework_settings import REST_FRAMEWORK
 from .configurations.jwt_settings import SIMPLE_JWT
 from .configurations.database_settings import postgres_settings
 from .configurations.storage import *
+from .configurations.celery_settings import (
+    CELERY_BROKER_URL,
+    CELERY_RESULT_BACKEND,
+    CELERY_CACHE_BACKEND,
+    CELERY_RESULT_EXTENDED,
+    CELERY_RESULT_EXPIRES,
+)
 
 
 """ 
@@ -31,9 +38,8 @@ CORE_APPS = [
 THIRD_PARTY_APPS = [
     "rest_framework",
     "corsheaders",
-    "import_export",
     "drf_spectacular",
-
+    "django_celery_results",
     
 ]
 

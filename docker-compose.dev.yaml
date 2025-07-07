@@ -1,5 +1,9 @@
 services:
 
+  redis:
+    image: redis:latest
+    container_name: time_flow_api_redis
+    
   postgres:
     image: postgres:latest
     container_name: time_flow_api_postgres
@@ -21,11 +25,42 @@ services:
     volumes:
       - ./:/code
     restart: always
+    ports:
+      - "8000:8000"
     depends_on:
       - postgres
+  
+  celery:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        ENVIRONMENT: dev
+    container_name: time_flow_api_api_celery
+    env_file:
+      - .envs/dev/api.env
+      - .envs/dev/db.env
+    volumes:
+      - ./:/code
+    entrypoint: python -m celery -A time_flow_api worker -l info
+    depends_on:
+      - redis
+
+  celery-beat:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        ENVIRONMENT: dev
+    container_name: time_flow_api_celery_beat
+    env_file:
+      - .envs/dev/api.env
+      - .envs/dev/db.env
+    volumes:
+      - ./:/code
+    entrypoint: python -m celery -A time_flow_api beat -l info
+    depends_on:
+      - redis
 
 volumes:
   time_flow_api_postgres_volume:
-  
-  
-

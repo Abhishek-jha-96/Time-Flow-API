@@ -1,0 +1,31 @@
+services:
+
+  postgres:
+    image: postgres:latest
+    container_name: time_flow_api_postgres
+    env_file:
+      - .envs/prod/db.env
+    volumes:
+      - time_flow_api_postgres_volume:/var/lib/postgresql/data/
+
+  server:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        ENVIRONMENT: prod
+    container_name: time_flow_api_api
+    env_file:
+      - .envs/prod/api.env
+      - .envs/prod/db.env
+    volumes:
+      - ./:/code
+    restart: always
+    depends_on:
+      - postgres
+
+volumes:
+  time_flow_api_postgres_volume:
+  
+  
+

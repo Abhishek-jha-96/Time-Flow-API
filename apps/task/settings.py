@@ -19,3 +19,4 @@ class Priority(TextChoices):
         CRITICAL = 'Critical', 'Critical'
 
 HF_API_TOKEN = get_env_var("HF_API_TOKEN")
+PATCH = "PATCH"

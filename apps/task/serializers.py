@@ -40,3 +40,18 @@ class TaskSerializer(ModelSerializer):
         task = db_create_record(model=Task, data=task_data)
 
         return task
+
+class TaskUpdateSerializer(ModelSerializer):
+    class Meta:
+        model = Task
+        fields = ("is_completed", )
+    
+    def validate_is_completed(self, is_completed):
+        if self.instance.is_completed and is_completed:
+            raise ValidationError("Task is already marked as completed.")
+        return is_completed
+    
+    def update(self, instance, validated_data):
+        if validated_data.get("is_completed"):
+            validated_data["status"] = Status.COMPLETED
+        return super().update(instance, validated_data)
